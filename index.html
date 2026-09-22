@@ -3,46 +3,172 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZZZIP — Visual Communication Designer</title>
+<meta name="description" content="Tailanghui — Visual Communication Design Portfolio">
+<title>PORTFOLIO — TAILANGHUI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
 <header class="nav">
-<a class="brand" href="#top"><span class="brand-mark">Z</span> TAILANGHUI</a>
-<nav><a href="#work">WORKS</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></nav>
-<a class="nav-dot" href="#contact"></a>
+  <a class="brand" href="#top"><span class="brand-mark">L/S</span><span>DESIGN<br>INDEX</span></a>
+  <nav>
+    <a href="#work">INDEX</a><a href="#profile">PROFILE</a>
+    <a href="#work">IP &amp; GOODS</a><a href="#work">ILLUSTRATION</a>
+    <a href="#work">BRAND<br>VISUAL</a><a href="#work">AIGC<br>VIDEO</a>
+  </nav>
+  <a class="contact-pill" href="#contact">CONTACT ↗</a>
+  <button class="menu-btn" aria-label="Open menu">+</button>
 </header>
+
 <main id="top">
 <section class="hero">
-<div class="hero-copy">
-<p class="eyebrow">VISUAL COMMUNICATION DESIGNER · 2026</p>
-<h1>Designing<br><em>visuals</em> with<br>character.</h1>
-<p class="intro">视觉传达设计应届生，专注于 IP、品牌视觉与电商视觉。用清晰的概念、系统化的视觉语言，让作品被快速理解，也值得被记住。</p>
-<a class="scroll" href="#work"><span>↓</span> SELECTED WORKS</a>
-</div>
-<div class="hero-art">
-<div class="orb"></div>
-<div class="zzz"><div class="ear e1"></div><div class="ear e2"></div><div class="head"></div><div class="eye eye1"></div><div class="eye eye2"></div><div class="mouth"></div><div class="belt">I DON'T<br>CARE.</div><div class="leg l1"></div><div class="leg l2"></div></div>
-<span class="art-label">ZZZIP / 001</span>
-</div>
+  <div class="hero-copy">
+    <p class="eyebrow">2026 SELECTED WORKS&nbsp;&nbsp;精选作品</p>
+    <h1><span>Port</span>folio</h1>
+    <h2>TAILANGHUI</h2>
+    <p class="cn">视觉传达设计 / IP设计 / 品牌视觉 / 电商视觉</p>
+    <p class="intro">以概念为起点，以视觉系统为方法。关注年轻人的情绪、品牌表达与具有记忆点的视觉体验。</p>
+    <div class="roles">
+      <span>Visual Design</span><span>IP / Character</span>
+      <span>Brand Identity</span><span>AIGC</span>
+    </div>
+    <a class="scroll" href="#work">SCROLL DOWN <span>↓</span></a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="visual-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-frame">
+      <div class="frame-head"></div><div class="frame-body"></div>
+      <div class="frame-label">HERO IMAGE / REPLACE ME</div>
+    </div>
+    <div class="vertical-type">VISUAL COMMUNICATION / 2026</div>
+    <div class="hero-index">01 / 05</div>
+  </div>
 </section>
-<section class="statement"><span>01 / APPROACH</span><h2>I turn everyday<br>feelings into <span>visual systems.</span></h2></section>
-<section id="work" class="works">
-<div class="section-head"><p>02 / SELECTED WORKS</p><p>04 PROJECTS</p></div>
-<a class="project" href="#zzzip"><div class="project-visual zzz-card"><div class="card-no">01</div><div class="mini-zzz"><i></i><i></i><b></b></div><div class="card-word">ZZZIP</div></div><div class="project-info"><span>IP DESIGN · CHARACTER · VISUAL SYSTEM</span><h3>ZZZIP</h3><p>为当代情绪代言的“归零型”打工人 IP。</p><b>VIEW CASE ↗</b></div></a>
-<a class="project" href="#ecommerce"><div class="project-visual blue-gradient"><div class="fake-product"></div><span>02</span><strong>SONIC<br>BRUSH</strong></div><div class="project-info"><span>E-COMMERCE · ART DIRECTION</span><h3>Clean Beyond Every Smile</h3><p>以科技感、留白与单一卖点节奏构建产品详情视觉。</p><b>VIEW CASE ↗</b></div></a>
-<a class="project" href="#brand"><div class="project-visual brand-card"><span>03</span><div>BRAND<br>VISUAL<br>IDENTITY</div></div><div class="project-info"><span>BRAND IDENTITY · VISUAL LANGUAGE</span><h3>ZZZ / OFF THE CLOCK</h3><p>从角色 IP 延伸至可持续使用的打工人品牌视觉。</p><b>VIEW CASE ↗</b></div></a>
-<a class="project" href="#aigc"><div class="project-visual lab-card"><span>04</span><div class="gridlines"></div><strong>AIGC<br>VISUAL LAB</strong></div><div class="project-info"><span>AIGC · EXPERIMENTAL VISUAL</span><h3>Visual Experiments</h3><p>探索生成式工具与平面设计之间的视觉关系。</p><b>VIEW CASE ↗</b></div></a>
+
+<section class="marquee"><div>DESIGN / IP / BRAND / GOODS / ILLUSTRATION / AIGC / DESIGN / IP / BRAND / GOODS /</div></section>
+
+<section id="work" class="work-section">
+  <div class="section-top"><span>01 / SELECTED WORKS</span><span>04 PROJECTS</span></div>
+
+  <a class="project-card project-dark" href="#zzzip">
+    <div class="project-number">01</div>
+    <div class="project-art zzz-art">
+      <div class="zzz-shape"><i></i><i></i><b></b><em>ZZZ</em></div>
+      <span class="art-note">IP / CHARACTER / VISUAL SYSTEM</span>
+    </div>
+    <div class="project-meta">
+      <span>IP DESIGN · CHARACTER BUILD</span><h3>ZZZIP</h3>
+      <p>为当代情绪代言的“归零型”打工人 IP。用极简造型、重复行为与蓝色视觉语言构建完整角色系统。</p>
+      <strong>VIEW CASE ↗</strong>
+    </div>
+  </a>
+
+  <a class="project-card project-blue" href="#ecommerce">
+    <div class="project-number">02</div>
+    <div class="project-art product-art">
+      <div class="product"></div><div class="product-copy">CLEAN<br>BEYOND<br>EVERY SMILE.</div>
+      <span class="art-note">E-COMMERCE / ART DIRECTION</span>
+    </div>
+    <div class="project-meta">
+      <span>E-COMMERCE · PRODUCT VISUAL</span><h3>SONIC BRUSH</h3>
+      <p>深蓝、黑色与金色构成科技基调，以大比例产品、留白和单一卖点建立高级产品叙事。</p>
+      <strong>VIEW CASE ↗</strong>
+    </div>
+  </a>
+
+  <a class="project-card project-lilac" href="#brand">
+    <div class="project-number">03</div>
+    <div class="project-art brand-art">
+      <span>ZZZ<br>OFF<br>THE<br>CLOCK.</span><b>I DON'T CARE.</b>
+      <div class="art-note">BRAND IDENTITY / GOODS</div>
+    </div>
+    <div class="project-meta">
+      <span>BRAND VISUAL · GOODS</span><h3>OFF THE CLOCK</h3>
+      <p>从 ZZZ 角色语言延伸出的打工人品牌视觉，可继续扩展到贴纸、卡片、抱枕与服装。</p>
+      <strong>VIEW CASE ↗</strong>
+    </div>
+  </a>
+
+  <a class="project-card project-light" href="#aigc">
+    <div class="project-number">04</div>
+    <div class="project-art lab-art">
+      <div class="lab-word">AIGC<br>VISUAL<br>LAB</div><div class="lab-grid"></div>
+      <span class="art-note">IMAGE / MOTION / EXPERIMENT</span>
+    </div>
+    <div class="project-meta">
+      <span>AIGC · EXPERIMENTAL VISUAL</span><h3>VISUAL LAB</h3>
+      <p>把 AIGC 当作视觉探索工具，重点展示概念、筛选、重构、排版与后期控制。</p>
+      <strong>VIEW CASE ↗</strong>
+    </div>
+  </a>
 </section>
-<section class="case" id="zzzip"><div class="case-top"><span>01 — ZZZIP</span><span>IP DESIGN / 2026</span></div><div class="case-hero"><div class="case-z">Z<span>ZZ</span></div><p>OFF THE CLOCK.<br>BACK TO ZERO.</p></div><div class="case-text"><span>CONCEPT</span><h2>把“疲惫”变成一种<br>可以被看见的归零状态。</h2><p>在高压工作环境下，情绪与注意力持续消耗。本项目以“归零状态”为核心概念，将情绪疲惫转化为视觉符号系统。通过极简造型与重复行为设计，实现情绪重置的视觉表达。</p></div></section>
-<section class="case-grid" id="ecommerce"><div class="small-label">02 — E-COMMERCE</div><div><h2>Clean Beyond<br>Every Smile.</h2><p>深蓝、黑色与金色构成科技视觉基调，以大比例产品、留白和结构拆解建立高级产品叙事。</p></div><div class="product-stage"><div class="brush"></div><span>42999<br>VPM</span></div></section>
-<section class="case-grid brand-case" id="brand"><div class="small-label">03 — BRAND</div><div><h2>OFF THE<br>CLOCK.</h2><p>从 ZZZ 的角色语言延伸到品牌识别、周边与日常沟通，让“归零”成为一套可以持续生长的视觉资产。</p></div><div class="brand-type">I DON'T CARE.<br><small>AND THAT'S OK.</small></div></section>
-<section class="case-grid lab-case" id="aigc"><div class="small-label">04 — AIGC LAB</div><div><h2>IMAGE ×<br>IDEA × SYSTEM</h2><p>以 AIGC 作为视觉探索工具，重点保留设计者的概念、筛选、重构与后期控制。</p></div><div class="lab-stage"><span>EXPERIMENT<br>01 / 02 / 03</span></div></section>
-<section id="about" class="about"><div class="section-head"><p>03 / ABOUT</p><p>DESIGNER PROFILE</p></div><div class="about-grid"><h2>HI,<br>I'M <span>TAILANGHUI.</span></h2><div><p class="big">Visual Communication Designer</p><p>视觉传达设计本科应届生。关注 IP 设计、品牌视觉、电商视觉与 AIGC 视觉实验。</p><div class="meta"><span>BA / VISUAL COMMUNICATION</span><span>CHINA / 2026</span><span>OPEN TO DESIGN OPPORTUNITIES</span></div></div></div></section>
-<section id="contact" class="contact"><p>04 / CONTACT</p><h2>LET'S MAKE<br><span>SOMETHING.</span></h2><a href="mailto:your-email@example.com">your-email@example.com ↗</a><footer><span>© 2026 TAILANGHUI</span><span>ZZZIP / VISUAL DESIGN</span></footer></section>
+
+<section class="statement">
+  <span>02 / DESIGN APPROACH</span>
+  <h2>Concept first.<br><em>Visual system second.</em></h2>
+  <p>我希望每一个项目都有一个可以被快速理解的核心概念，再通过字体、颜色、构图、角色、动效和应用场景把它变成完整的视觉系统。</p>
+</section>
+
+<section id="zzzip" class="case case-black">
+  <div class="case-head"><span>01 — ZZZIP</span><span>IP DESIGN / 2026</span></div>
+  <div class="case-hero">
+    <div class="giant-zzz">Z<span>ZZ</span></div>
+    <div class="case-caption">OFF THE CLOCK.<br>BACK TO ZERO.</div>
+  </div>
+  <div class="case-text">
+    <span>CONCEPT / 归零状态</span>
+    <h2>把“疲惫”变成一种<br>可以被看见的状态。</h2>
+    <p>在高压工作环境下，情绪与注意力持续消耗。本项目以“归零状态”为核心概念，将情绪疲惫转化为视觉符号系统，通过极简造型、重复行为和高识别色彩建立 ZZZ 的角色语言。</p>
+  </div>
+</section>
+
+<section id="ecommerce" class="case case-product">
+  <div class="case-head"><span>02 — E-COMMERCE</span><span>PRODUCT VISUAL / 2026</span></div>
+  <div class="product-case-layout">
+    <div><span class="tiny">ART DIRECTION</span><h2>Clean Beyond<br>Every Smile.</h2><p>深蓝 × 黑 × 金。让产品成为画面的第一视觉焦点。</p></div>
+    <div class="large-product"><div class="product"></div><span>42999 VPM</span></div>
+  </div>
+</section>
+
+<section id="brand" class="case case-brand">
+  <div class="case-head"><span>03 — BRAND VISUAL</span><span>ZZZ / OFF THE CLOCK</span></div>
+  <div class="brand-case-layout">
+    <h2>OFF THE<br>CLOCK.</h2><div class="brand-panel">I DON'T CARE.<small>AND THAT'S OK.</small></div>
+  </div>
+</section>
+
+<section id="aigc" class="case case-lab">
+  <div class="case-head"><span>04 — AIGC LAB</span><span>IMAGE × IDEA × SYSTEM</span></div>
+  <div class="lab-case-layout">
+    <div><span class="tiny">EXPERIMENTAL VISUAL</span><h2>MAKE<br>IMAGES<br>MEAN.</h2><p>探索生成式工具与平面设计之间的关系：从生成，到筛选，再到设计者的重构。</p></div>
+    <div class="lab-window"><span>01 / 02 / 03 / 04</span><b>VISUAL<br>EXPERIMENT</b></div>
+  </div>
+</section>
+
+<section id="profile" class="profile">
+  <div class="section-top"><span>03 / PROFILE</span><span>DESIGNER</span></div>
+  <div class="profile-grid">
+    <h2>HI,<br>I'M<br><em>TAILANGHUI.</em></h2>
+    <div>
+      <p class="profile-big">Visual Communication Designer</p>
+      <p>视觉传达设计本科应届生，关注 IP 设计、品牌视觉、电商视觉与 AIGC。作品集以“概念清晰 + 视觉统一 + 应用完整”为主要方向。</p>
+      <div class="profile-data"><span>BA / VISUAL COMMUNICATION</span><span>CHINA / 2026</span><span>OPEN TO DESIGN OPPORTUNITIES</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <span>04 / CONTACT</span><h2>LET'S MAKE<br><em>SOMETHING.</em></h2>
+  <a href="mailto:your-email@example.com">your-email@example.com ↗</a>
+  <footer><span>© 2026 TAILANGHUI</span><span>PORTFOLIO TEMPLATE / V1.0</span></footer>
+</section>
 </main>
 <script src="script.js"></script>
-</body></html>
+</body>
+</html>
