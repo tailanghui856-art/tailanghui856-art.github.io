@@ -1,33 +1,87 @@
-const canvas=document.getElementById('particle-canvas');
-const ctx=canvas.getContext('2d');
-let w=innerWidth,h=innerHeight,dpr=Math.min(devicePixelRatio||1,2),mouse={x:w/2,y:h/2,active:false},particles=[];
-function resize(){
-  w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,2);
-  canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  particles=Array.from({length:innerWidth<700?26:48},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.7+.5}));
-}
-addEventListener('resize',resize);
-addEventListener('pointermove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true});
-addEventListener('pointerleave',()=>mouse.active=false);
-function draw(){
-  ctx.clearRect(0,0,w,h);
-  particles.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
-    const dx=mouse.x-p.x,dy=mouse.y-p.y,dist=Math.hypot(dx,dy);
-    if(mouse.active&&dist<150){p.x-=dx/dist*(150-dist)*.006;p.y-=dy/dist*(150-dist)*.006}
-    ctx.globalAlpha=.35;ctx.fillStyle='#ff5148';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min((i % 4) * 70, 210)}ms`;
+      observer.observe(el);
+    });
+  } else revealEls.forEach(el => el.classList.add('in-view'));
+
+  // Project category filter
+  const filters = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('.project-card');
+  filters.forEach(button => button.addEventListener('click', () => {
+    filters.forEach(item => item.classList.toggle('active', item === button));
+    const selected = button.dataset.filter;
+    cards.forEach(card => {
+      card.classList.toggle('is-hidden', selected !== 'all' && card.dataset.category !== selected);
+    });
+  }));
+
+  // Mobile navigation
+  const menuButton = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  menuButton?.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
   });
-  if(mouse.active){
-    ctx.globalAlpha=.28;ctx.strokeStyle='#ff5148';ctx.lineWidth=.6;
-    particles.forEach(p=>{const dist=Math.hypot(mouse.x-p.x,mouse.y-p.y);if(dist<125){ctx.beginPath();ctx.moveTo(mouse.x,mouse.y);ctx.lineTo(p.x,p.y);ctx.stroke()}});
-    ctx.globalAlpha=.8;ctx.fillStyle='#ff5148';ctx.beginPath();ctx.arc(mouse.x,mouse.y,2.5,0,Math.PI*2);ctx.fill();
+  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Cursor label on project cards
+  const cursorLabel = document.querySelector('.cursor-label');
+  if (cursorLabel && matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('pointerenter', () => cursorLabel.classList.add('visible'));
+      card.addEventListener('pointerleave', () => cursorLabel.classList.remove('visible'));
+      card.addEventListener('pointermove', e => {
+        cursorLabel.style.left = `${e.clientX}px`;
+        cursorLabel.style.top = `${e.clientY}px`;
+      });
+    });
   }
-  requestAnimationFrame(draw);
-}
-resize();draw();
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
-  const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'})}
-}));
-document.querySelector('.menu-btn')?.addEventListener('click',()=>document.querySelector('.nav nav')?.classList.toggle('mobile-open'));
+
+  // Lightweight blue particle trail. Disabled on touch and reduced-motion devices.
+  const canvas = document.getElementById('particles');
+  if (!canvas || reduceMotion || !matchMedia('(pointer:fine)').matches) return;
+  const ctx = canvas.getContext('2d');
+  let width, height, particles = [], lastSpawn = 0;
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    width = window.innerWidth; height = window.innerHeight;
+    canvas.width = width * dpr; canvas.height = height * dpr;
+    canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  resize(); window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('pointermove', e => {
+    const now = performance.now();
+    if (now - lastSpawn < 22) return;
+    lastSpawn = now;
+    particles.push({ x:e.clientX, y:e.clientY, r:1.2 + Math.random()*2.1, a:.75, vx:(Math.random()-.5)*.7, vy:(Math.random()-.5)*.7 });
+    if (particles.length > 75) particles.shift();
+  }, { passive: true });
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+    particles = particles.filter(p => p.a > .035);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.a *= .955; p.r *= .992;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(74, 110, 255, ${p.a})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  };
+  draw();
+})();
