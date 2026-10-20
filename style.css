@@ -195,3 +195,152 @@ body{background:#080809;color:#f4f2ef}
  .statement h2,.contact h2{font-size:clamp(54px,14vw,92px)}
  .footer-bottom{gap:12px;flex-wrap:wrap;font-size:9px}
 }
+/* LINSHEN 风格：作品集排版优化 */
+:root {
+  --accent: #ff3b25;
+}
+
+/* 顶部悬浮导航 */
+.topbar {
+  top: 16px;
+  left: 2%;
+  right: 2%;
+  padding: 10px 14px;
+  border: 1px solid #ffffff30;
+  border-radius: 22px;
+  background: rgba(38, 38, 40, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* 左上角标志 */
+.wordmark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+}
+
+/* 导航文字 */
+.topbar nav a:hover {
+  color: var(--accent);
+}
+
+/* 联系按钮 */
+.menu {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  background: var(--accent);
+  color: white;
+}
+
+/* 首屏背景 */
+.hero {
+  background:
+    radial-gradient(
+      ellipse at 75% 45%,
+      #292326 0%,
+      #111011 38%,
+      #050505 78%
+    );
+}
+
+/* 背景超大字 */
+.hero-giant {
+  left: 3%;
+  top: 12%;
+  color: var(--accent);
+  text-shadow: none;
+}
+
+.hero-giant span {
+  color: var(--accent);
+  -webkit-text-stroke: 0;
+}
+
+/* 主标题 */
+.hero-copy {
+  left: 3.5%;
+  z-index: 5;
+}
+
+.hero-copy .eyebrow {
+  color: #aaa;
+  letter-spacing: 0.16em;
+}
+
+/* 个人签名 */
+.signature span {
+  color: #aaa;
+}
+
+/* 项目区强调色 */
+.selected-heading h2 em,
+.about-layout h2 em,
+.arrow,
+.line-link span {
+  color: var(--accent);
+}
+
+.work-filters button.active,
+.work-filters button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 手机端适配 */
+@media (max-width: 700px) {
+  .topbar {
+    left: 12px;
+    right: 12px;
+    top: 10px;
+    padding: 8px 10px;
+  }
+
+  .topbar nav {
+    gap: 8px;
+    overflow: hidden;
+    font-size: 7px;
+  }
+
+  .topbar nav a:nth-child(n+4) {
+    display: none;
+  }
+
+  .menu {
+    padding: 9px 11px;
+    font-size: 8px;
+  }
+
+  .hero-giant {
+    top: 18%;
+    left: 4%;
+    font-size: 25vw;
+  }
+
+  .hero-object {
+    width: 65vw;
+    height: 85vw;
+    right: -8%;
+    top: 26%;
+  }
+
+  .hero-copy {
+    left: 5%;
+    bottom: 32%;
+    max-width: 95%;
+  }
+
+  .hero-copy h1 {
+    font-size: 13vw;
+  }
+
+  .signature {
+    left: 5%;
+  }
+}
+
