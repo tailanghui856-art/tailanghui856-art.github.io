@@ -4,3 +4,14 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{i
 document.querySelectorAll('.work-filters button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.work-filters button').forEach(b=>b.classList.remove('active'));button.classList.add('active');const filter=button.dataset.filter;document.querySelectorAll('.work-card').forEach(card=>card.classList.toggle('filtered-out',filter!=='all'&&card.dataset.type!==filter))}));
 document.querySelectorAll('.work-card,.film-card,.gallery-tile').forEach(card=>{card.addEventListener('pointermove',e=>{if(!matchMedia('(pointer:fine)').matches)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.setProperty('--mx',x.toFixed(2));card.style.setProperty('--my',y.toFixed(2))})});
 let scrollY=0;window.addEventListener('scroll',()=>{scrollY=window.scrollY;document.documentElement.style.setProperty('--scroll',scrollY);document.querySelector('.hero-giant').style.transform=`translateY(${Math.min(scrollY*.16,100)}px)`;document.querySelector('.hero-object').style.marginTop=`${Math.min(scrollY*.035,32)}px`},{passive:true});
+
+
+/* Start the editorial title only after the first second. */
+(() => {
+  const revealTitle = () => document.body.classList.add('intro-title-on');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.setTimeout(revealTitle, 1000), { once: true });
+  } else {
+    window.setTimeout(revealTitle, 1000);
+  }
+})();
