@@ -344,3 +344,94 @@ body{background:#080809;color:#f4f2ef}
   }
 }
 
+
+
+/* Opening title reveal: keep the first second focused on the hero subject. */
+.hero-giant,
+.hero-copy {
+  visibility: hidden;
+  opacity: 0;
+}
+body.intro-title-on .hero-giant,
+body.intro-title-on .hero-copy {
+  visibility: visible;
+  opacity: 1;
+}
+.hero-giant {
+  perspective: 900px;
+}
+.hero-giant .title-line {
+  display: flex;
+  gap: .015em;
+  transform-style: preserve-3d;
+}
+.hero-giant .title-line.second {
+  margin-left: .11em;
+}
+.hero-giant .title-line i {
+  display: inline-block;
+  font-style: normal;
+  opacity: 0;
+  transform: translate3d(0, .22em, -100px) rotateX(-55deg) rotateY(-18deg);
+  animation: none;
+}
+body.intro-title-on .hero-giant .title-line i {
+  animation: giantLetterIn .72s cubic-bezier(.16,.8,.2,1) forwards;
+  animation-delay: calc(1s + var(--letter-index, 0) * 65ms);
+}
+.hero-giant .title-line i:nth-child(1){--letter-index:0}
+.hero-giant .title-line i:nth-child(2){--letter-index:1}
+.hero-giant .title-line i:nth-child(3){--letter-index:2}
+.hero-giant .title-line i:nth-child(4){--letter-index:3}
+.hero-giant .title-line.second i:nth-child(1){--letter-index:4}
+.hero-giant .title-line.second i:nth-child(2){--letter-index:5}
+.hero-giant .title-line.second i:nth-child(3){--letter-index:6}
+.hero-giant .title-line.second i:nth-child(4){--letter-index:7}
+.hero-giant .title-line.second i:nth-child(5){--letter-index:8}
+.stagger-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  perspective: 700px;
+}
+.stagger-title > span:not(.reg) {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 42px, -90px) rotateX(-70deg) rotateZ(var(--letter-tilt, 0deg));
+  transform-origin: 50% 100%;
+}
+body.intro-title-on .stagger-title > span:not(.reg) {
+  animation: headlineLetterIn .72s cubic-bezier(.16,.8,.2,1) forwards;
+  animation-delay: calc(1s + var(--letter-index, 0) * 75ms);
+}
+.stagger-title > span:nth-child(1){--letter-index:0;--letter-tilt:-5deg}
+.stagger-title > span:nth-child(2){--letter-index:1;--letter-tilt:3deg}
+.stagger-title > span:nth-child(3){--letter-index:2;--letter-tilt:-2deg}
+.stagger-title > span:nth-child(4){--letter-index:3;--letter-tilt:4deg}
+.stagger-title > span:nth-child(5){--letter-index:4;--letter-tilt:-4deg}
+.stagger-title > span:nth-child(6){--letter-index:5;--letter-tilt:2deg}
+.stagger-title > span:nth-child(7){--letter-index:6;--letter-tilt:-3deg}
+.stagger-title > span:nth-child(8){--letter-index:7;--letter-tilt:5deg}
+.stagger-title > span:nth-child(9){--letter-index:8;--letter-tilt:-2deg}
+.stagger-title .reg { flex: 0 0 auto; }
+@keyframes giantLetterIn {
+  0% { opacity: 0; transform: translate3d(0,.22em,-100px) rotateX(-55deg) rotateY(-18deg); filter: blur(8px); }
+  65% { opacity: 1; transform: translate3d(0,-.045em,25px) rotateX(8deg) rotateY(5deg); filter: blur(0); }
+  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0) rotateY(0); filter: blur(0); }
+}
+@keyframes headlineLetterIn {
+  0% { opacity: 0; transform: translate3d(0,42px,-90px) rotateX(-70deg) rotateZ(var(--letter-tilt,0deg)); filter: blur(9px); }
+  70% { opacity: 1; transform: translate3d(0,-8px,20px) rotateX(8deg) rotateZ(0); filter: blur(0); }
+  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0) rotateZ(0); filter: blur(0); }
+}
+.hero-copy h1 { text-shadow: 0 2px 0 #777, 0 12px 35px #000b; }
+@media (max-width:700px) {
+  .stagger-title { gap: 0; }
+  .stagger-title > span:not(.reg) { transform-origin: 50% 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-giant, .hero-copy { visibility: visible; opacity: 1; }
+  .hero-giant .title-line i, .stagger-title > span:not(.reg) {
+    opacity: 1; transform: none; animation: none !important;
+  }
+}
