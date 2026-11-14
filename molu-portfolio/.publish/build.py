@@ -1,3 +1,6 @@
+import base64
+import re
+from PIL import Image
 import concurrent.futures
 import hashlib
 import json
@@ -40,6 +43,28 @@ page = OUT / 'molu-portfolio/index.html'
 html = page.read_text(encoding='utf-8').replace(ORIGIN + '/', './media/')
 assert ORIGIN not in html
 page.write_text(html, encoding='utf-8')
+
+# Lightweight browsing surfaces; full original detail assets remain byte-for-byte verified above.
+preview = OUT / 'molu-portfolio/preview'
+preview.mkdir(exist_ok=True)
+image_urls = json.loads(re.search(r'Object.assign\(window.PORTFOLIO,(\{"images".*?\})\);', html).group(1))['images']
+image_urls['opening-art']='./media/images-4k/opening-art.png'
+for name, source in image_urls.items():
+    source_path = OUT / 'molu-portfolio' / source.removeprefix('./')
+    if not source_path.is_file():
+        continue
+    with Image.open(source_path) as image:
+        image = image.convert('RGB')
+        image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+        image.save(preview / (name+'.webp'), 'WEBP', lossless=True, method=4)
+# Preserve the existing music file, but remove its base64 payload from the critical HTML.
+legacy_url='https://raw.githubusercontent.com/tailanghui856-art/tailanghui856-art.github.io/a952dad223bd7863a317003880a4ffb949394041/molu-portfolio/index.html'
+with urllib.request.urlopen(legacy_url, timeout=60) as response:
+    legacy=response.read().decode('utf-8-sig')
+audio=re.search(r'data:audio/mp4;base64,([A-Za-z0-9+/=]+)',legacy)
+if audio:
+    (preview / 'ambience.m4a').write_bytes(base64.b64decode(audio.group(1)))
+
 (OUT / '.nojekyll').touch()
 size = sum(p.stat().st_size for p in OUT.rglob('*') if p.is_file())
 assert size < 1024 ** 3, 'Pages site exceeds 1 GiB'
