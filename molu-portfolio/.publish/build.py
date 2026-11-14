@@ -1,6 +1,6 @@
 import base64
 import re
-from PIL import Image
+from PIL import Image, ImageFilter
 import concurrent.futures
 import hashlib
 import json
@@ -69,3 +69,13 @@ if audio:
 size = sum(p.stat().st_size for p in OUT.rglob('*') if p.is_file())
 assert size < 1024 ** 3, 'Pages site exceeds 1 GiB'
 print(f'Published asset bytes: {size}; {len(files)} originals verified', flush=True)
+
+# The shared site contains only blurred IP detail tiles, never clear originals at these paths.
+private_tiles = OUT / 'molu-portfolio/media/ip-case'
+blurred_tiles = OUT / 'molu-portfolio/media/ip-case-blurred'
+blurred_tiles.mkdir(exist_ok=True)
+for tile in private_tiles.glob('part-*.png'):
+    with Image.open(tile) as image:
+        image.convert('RGB').filter(ImageFilter.GaussianBlur(65)).save(blurred_tiles / tile.name, 'PNG')
+    tile.unlink()
+print('IP detail privacy rendering complete', flush=True)
